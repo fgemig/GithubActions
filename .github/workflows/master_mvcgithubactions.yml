@@ -21,9 +21,11 @@ jobs:
       with:
         dotnet-version: 3.1.201
     - name: Install dependencies
-      run: dotnet restore GitHubActions.Web/GitHubActions.Web.csproj
+      run: dotnet restore GitHubActions.Web
+      working-directory: 'GitHubActions.Web/'
     - name: Build
-      run: dotnet build GitHubActions.Web/GitHubActions.Web.csproj --configuration Release --no-restore
+      run: dotnet build GitHubActions.Web --configuration Release --no-restore
+      working-directory: 'GitHubActions.Web/'
 
   gitHubAction_testes:
     name: Tests
@@ -32,15 +34,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Executando Testes
-      run: dotnet test GitHubActions.Tests/GitHubActions.Tests.csproj -v n    
-    
+      run: dotnet test GitHubActions.Tests -v n    
+      working-directory: 'GitHubActions.Tests/'
+
   gitHubAction_publish:  
     name: 'Publish'
     runs-on: ubuntu-latest
 
     steps:
     - name: dotnet publish
-      run: dotnet publish GitHubActions.Web/GitHubActions.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish GitHubActions.Web -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      working-directory: 'GitHubActions.Web/'
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
