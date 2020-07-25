@@ -9,31 +9,38 @@ on:
       - master
 
 jobs:
-  gitHubActions_Web:
-
-  name: Build
+  
+  gitHubActions_web:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Executando Testes
-      run: dotnet test GitHubActions.Tests/GitHubActions.Tests.csproj -v n    
-    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.201
-    
     - name: Install dependencies
       run: dotnet restore GitHubActions.Web/GitHubActions.Web.csproj
-
     - name: Build
       run: dotnet build GitHubActions.Web/GitHubActions.Web.csproj --configuration Release --no-restore
 
+  gitHubAction_testes:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Executando Testes
+      run: dotnet test GitHubActions.Tests/GitHubActions.Tests.csproj -v n    
+    
+  gitHubAction_publish:  
+    name: 'Publish'
+    runs-on: ubuntu-latest
+
+    steps:
     - name: dotnet publish
       run: dotnet publish GitHubActions.Web/GitHubActions.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
