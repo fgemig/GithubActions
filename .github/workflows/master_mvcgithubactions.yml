@@ -28,7 +28,7 @@ jobs:
       working-directory: 'GitHubActions.Web/'
 
   gitHubAction_testes:
-    name: Tests & Deploy
+    name: Test & Deploy
     runs-on: ubuntu-latest
 
     steps:
