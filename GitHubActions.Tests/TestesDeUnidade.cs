@@ -23,7 +23,7 @@ namespace GitHubActions.Tests
 
             Assert.IsNotNull(pessoa);
 
-            Assert.AreEqual("Fabio Gemignani2", pessoa.Nome);
+            Assert.AreEqual("Fabio Gemignani", pessoa.Nome);
         }
     }
 }
