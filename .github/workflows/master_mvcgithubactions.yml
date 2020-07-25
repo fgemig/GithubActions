@@ -1,7 +1,10 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - mvcgithubactions
 
 on:
-  [push, pull_request]:
+  push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
