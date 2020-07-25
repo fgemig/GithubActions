@@ -24,7 +24,7 @@ jobs:
       run: dotnet restore GitHubActions.Web
       working-directory: 'GitHubActions.Web/'
     - name: Build
-      run: dotnet build GitHubActions.Web --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
       working-directory: 'GitHubActions.Web/'
 
   gitHubAction_testes:
@@ -34,7 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Executando Testes
-      run: dotnet test GitHubActions.Tests -v n    
+      run: dotnet test -v n    
       working-directory: 'GitHubActions.Tests/'
 
   gitHubAction_publish:  
@@ -43,7 +43,7 @@ jobs:
 
     steps:
     - name: dotnet publish
-      run: dotnet publish GitHubActions.Web -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       working-directory: 'GitHubActions.Web/'
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
