@@ -37,7 +37,7 @@ jobs:
       run: dotnet test -v n    
       working-directory: 'GitHubActions.Tests/'  
     - name: dotnet publish
-      run: dotnet publish -c Release -o ./myapp
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       working-directory: 'GitHubActions.Web/'
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
@@ -45,5 +45,4 @@ jobs:
         app-name: 'mvcgithubactions'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8fab95f6353948959785c75bbf55f95a }}
-        package: './myapp'
-      working-directory: 'GitHubActions.Web/'
+        package: ${{env.DOTNET_ROOT}}/myapp
