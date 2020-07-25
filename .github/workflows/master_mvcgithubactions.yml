@@ -28,20 +28,14 @@ jobs:
       working-directory: 'GitHubActions.Web/'
 
   gitHubAction_testes:
-    name: Tests
+    name: Tests & Deploy
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Executando Testes
       run: dotnet test -v n    
-      working-directory: 'GitHubActions.Tests/'
-
-  gitHubAction_publish:  
-    name: 'Publish'
-    runs-on: ubuntu-latest
-
-    steps:
+      working-directory: 'GitHubActions.Tests/'  
     - name: dotnet publish
       run: dotnet publish -c Release -o ./myapp
       working-directory: 'GitHubActions.Web/'
