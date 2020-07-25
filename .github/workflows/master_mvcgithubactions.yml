@@ -9,21 +9,16 @@ on:
       - master
 
 jobs:
-  githubActions_Testes:
-    name: Testes
+  gitHubActions_Web:
+
+  name: Build
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Executando Testes
       run: dotnet test GitHubActions.Tests/GitHubActions.Tests.csproj -v n    
-
-  gitHubActions_Web:
-    name: Build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
     
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
