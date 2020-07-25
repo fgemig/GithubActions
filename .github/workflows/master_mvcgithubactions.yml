@@ -46,3 +46,4 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8fab95f6353948959785c75bbf55f95a }}
         package: './myapp'
+      working-directory: 'GitHubActions.Web/'
